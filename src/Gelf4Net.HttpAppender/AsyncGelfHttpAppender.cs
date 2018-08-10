@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,9 +16,10 @@ namespace Gelf4Net.Appender
 
         public AsyncGelfHttpAppender()
         {
-            _pendingTasks = new BlockingCollection<string>();
+            _pendingTasks = new BlockingCollection<string>(100);
             _cts = new CancellationTokenSource();
-            _sender = Task.Run(SendMessagesAsync);
+            // FIXME: use the machine's core count?
+            _sender = Task.WhenAll(Enumerable.Range(1, 4).Select(_ => Task.Run(SendMessagesAsync)));
         }
 
         protected override void Append(LoggingEvent[] loggingEvents)
