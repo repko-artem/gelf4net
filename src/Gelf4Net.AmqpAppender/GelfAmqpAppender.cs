@@ -3,6 +3,7 @@ using RabbitMQ.Client;
 using System;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Gelf4Net.Appender
 {
@@ -62,6 +63,12 @@ namespace Gelf4Net.Appender
             }
         }
 
+        protected Task SendMessageAsync(string logMessage)
+        {
+            SendMessage(logMessage.GzipMessage(Encoding));
+            return CompletedTask;
+        }
+
         protected void SendMessage(byte[] payload)
         {
             if (WaitForConnectionToConnectOrReconnect(new TimeSpan(0, 0, 0, 0, 500)))
@@ -102,5 +109,12 @@ namespace Gelf4Net.Appender
                 Connection.Dispose();
             }
         }
+
+#if NETSTANDARD1_5
+        private static Task CompletedTask = Task.CompletedTask;
+#else
+        private static Task CompletedTask = Task.FromResult<bool>(true);
+#endif
+
     }
 }
