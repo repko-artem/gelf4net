@@ -14,13 +14,23 @@ namespace Gelf4Net.Util
         private readonly Func<string, Task> _sendFunc;
         private readonly Task _sender;
 
-        public BufferedLogSender(Func<string, Task> sendFunc)
+        public BufferedLogSender(BufferedSenderOptions options, Func<string, Task> sendFunc)
         {
-            _pendingTasks = new BlockingCollection<string>(100);
+            var bufferSize = options.BufferSize ?? BufferedSenderOptions.DefaultBufferSize;
+            if (bufferSize <= 0)
+            {
+                bufferSize = BufferedSenderOptions.DefaultBufferSize;
+            }
+            var numTasks = options.NumTasks ?? Environment.ProcessorCount;
+            if (numTasks <= 0)
+            {
+                numTasks = Environment.ProcessorCount;
+            }
+
+            _pendingTasks = new BlockingCollection<string>(bufferSize);
             _cts = new CancellationTokenSource();
             _sendFunc = sendFunc;
-            // FIXME: use the machine's core count?
-            _sender = Task.WhenAll(Enumerable.Range(1, 4).Select(_ => Task.Run(SendMessagesAsync)));
+            _sender = Task.WhenAll(Enumerable.Range(1, numTasks).Select(_ => Task.Run(SendMessagesAsync)));
         }
 
         private async Task SendMessagesAsync()
@@ -40,14 +50,14 @@ namespace Gelf4Net.Util
 
         public void QueueSend(string renderedLogLine)
         {
-            _pendingTasks.Add(renderedLogLine);
+            _pendingTasks.Add(renderedLogLine, _cts.Token);
         }
 
         public void Stop()
         {
             _cts.Cancel();
             Task.WaitAny(new[] { _sender }, TimeSpan.FromSeconds(10));
-            Debug.WriteLine("Logging thread has stopped");
+            Debug.WriteLine("[Gelf4Net] Logging thread has stopped");
         }
     }
 }

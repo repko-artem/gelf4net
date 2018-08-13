@@ -7,10 +7,17 @@ namespace Gelf4Net.Appender
     public class AsyncGelfHttpAppender : GelfHttpAppender
     {
         private readonly BufferedLogSender _sender;
+        public int Threads { get; set; }
+        public int BufferSize { get; set; }
 
         public AsyncGelfHttpAppender()
         {
-            _sender = new BufferedLogSender(SendMessageAsync);
+            var options = new BufferedSenderOptions
+            {
+                BufferSize = BufferSize,
+                NumTasks = Threads,
+            };
+            _sender = new BufferedLogSender(options, SendMessageAsync);
         }
 
         protected override void Append(LoggingEvent[] loggingEvents)

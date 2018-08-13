@@ -31,7 +31,7 @@ examples/packages
 upload.ps1
 /.gelf4netcore.xproj.swp
 /project.lock.json
-/.vs
+.vs/
 tools/
 private/
 .vscode/
