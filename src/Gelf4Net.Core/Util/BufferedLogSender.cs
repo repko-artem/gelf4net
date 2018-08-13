@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gelf4Net.Util
 {
-    public class BufferedLogSender
+    internal class BufferedLogSender
     {
         private readonly BlockingCollection<string> _pendingTasks;
         private readonly CancellationTokenSource _cts;
