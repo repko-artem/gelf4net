@@ -17,12 +17,12 @@ namespace Gelf4Net.Util
         public BufferedLogSender(BufferedSenderOptions options, Func<string, Task> sendFunc)
         {
             var bufferSize = options.BufferSize ?? BufferedSenderOptions.DefaultBufferSize;
-            if (bufferSize <= 0)
+            if (bufferSize <= 1)
             {
                 bufferSize = BufferedSenderOptions.DefaultBufferSize;
             }
             var numTasks = options.NumTasks ?? Environment.ProcessorCount;
-            if (numTasks <= 0)
+            if (numTasks <= 1)
             {
                 numTasks = Environment.ProcessorCount;
             }
