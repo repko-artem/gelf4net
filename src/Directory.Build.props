@@ -1,7 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>1.0.0.14</Version>
-    <PackageVersion>1.0.0.14</PackageVersion>
+    <VersionPrefix>1.0.0.14</VersionPrefix>
     <Authors>micahlmartin, jjchiw, contributors</Authors>
     <PackageProjectUrl>https://github.com/jjchiw/gelf4net</PackageProjectUrl>
     <PackageIconUrl>http://nuget.org/Content/Images/packageDefaultIcon.png</PackageIconUrl>
