@@ -80,12 +80,15 @@ namespace Gelf4Net.Appender
                 {
                     if (MaxChunkSize < payload.Length)
                     {
-                        var chunkCount = (payload.Length / MaxChunkSize) + 1;
+                        var chunkCount = payload.Length / MaxChunkSize;
+                        if (payload.Length % MaxChunkSize != 0)
+                            chunkCount++;                                                   
+                        
                         var messageId = GenerateMessageId();
                         var state = new UdpState() { SendClient = Client, Bytes = payload, ChunkCount = chunkCount, MessageId = messageId, SendIndex = 0 };
                         var messageChunkFull = GetMessageChunkFull(state.Bytes, state.MessageId, state.SendIndex, state.ChunkCount);
 
-                        while (state.SendIndex <= state.ChunkCount)
+                        while (state.SendIndex < state.ChunkCount)
                         {
                             messageChunkFull = GetMessageChunkFull(state.Bytes, state.MessageId, state.SendIndex, state.ChunkCount);
                             await Client.SendAsync(messageChunkFull, messageChunkFull.Length, RemoteEndPoint);
@@ -135,8 +138,8 @@ namespace Gelf4Net.Appender
 
         public static byte[] GenerateMessageId()
         {
-            Interlocked.Increment(ref ChunkMessageId);
-            return BitConverter.GetBytes(ChunkMessageId);
+            var currentId = Interlocked.Increment(ref ChunkMessageId);
+            return BitConverter.GetBytes(currentId);
         }
 
         public static byte[] CreateChunkedMessagePart(byte[] messageId, int index, int chunkCount)
