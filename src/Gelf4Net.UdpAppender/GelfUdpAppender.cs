@@ -72,9 +72,14 @@ namespace Gelf4Net.Appender
             }
         }
 
-        protected void SendMessage(byte[] payload)
+        protected Task SendMessageAsync(string logMessage)
         {
-            Task.Run(async () =>
+            return SendMessage(logMessage.GzipMessage(Encoding));
+        }
+
+        protected Task SendMessage(byte[] payload)
+        {
+            return Task.Run(async () =>
             {
                 try
                 {
