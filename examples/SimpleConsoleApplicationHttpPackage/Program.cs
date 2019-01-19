@@ -19,7 +19,7 @@ namespace SimpleConsoleApplication
 
             var text = Console.ReadLine();
 
-            while(text != "q")
+            while (text != "q")
             {
                 log.Debug(String.Format("Randomizer Sentence: {0}", text));
                 Console.WriteLine("Sent {0}", text);

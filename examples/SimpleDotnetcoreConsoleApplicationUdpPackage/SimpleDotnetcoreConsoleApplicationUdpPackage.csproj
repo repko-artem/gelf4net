@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Gelf4Net.UdpAppender" Version="1.0.0.14" />
+    <PackageReference Include="Gelf4Net.UdpAppender" Version="1.0.0.17" />
   </ItemGroup>
 
   <ItemGroup>
