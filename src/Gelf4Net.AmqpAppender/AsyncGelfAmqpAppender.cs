@@ -9,13 +9,15 @@ namespace Gelf4Net.Appender
 {
     public class AsyncGelfAmqpAppender : GelfAmqpAppender
     {
-        private readonly BufferedLogSender _sender;
+        private BufferedLogSender _sender;
 
         public int Threads { get; set; }
         public int BufferSize { get; set; }
 
-        public AsyncGelfAmqpAppender()
+        public override void ActivateOptions()
         {
+            base.ActivateOptions();
+
             var options = new BufferedSenderOptions
             {
                 BufferSize = BufferSize,
@@ -39,7 +41,7 @@ namespace Gelf4Net.Appender
                 _sender.QueueSend(this.RenderLoggingEvent(loggingEvent));
             }
         }
-        
+
         protected override void OnClose()
         {
             Debug.WriteLine("Closing Async Appender");

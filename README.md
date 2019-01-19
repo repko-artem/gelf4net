@@ -53,6 +53,10 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
         </appender>
 
         <appender name="AsyncGelfUdpAppender" type="Gelf4Net.Appender.AsyncGelfUdpAppender, Gelf4Net">
+            <!-- Number of log lines to buffer for async send. Defaults to 10-->
+            <bufferSize value="20" />
+            <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+            <threads value="2" />
             <remoteAddress value="192.168.44.10" />
             <remotePort value="12201" />
             <layout type="Gelf4Net.Layout.GelfLayout, Gelf4Net">
@@ -70,6 +74,22 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
                 <param name="Facility" value="RandomPhrases" />
                 <param name="IncludeLocationInformation" value="true" />
                 <param name="SendTimeStampAsString" value="false"/>
+                <!--Sets the full_message and short_message to the specified pattern-->
+                <!--<param name="ConversionPattern" value="[%t] %c{1} - %m" />-->
+            </layout>
+        </appender>
+
+        <appender name="AsyncGelfHttpAppender" type="Gelf4Net.Appender.AsyncGelfHttpAppender, Gelf4Net">
+            <url value="http://127.0.0.1:12201/gelf" />
+            <!-- Number of log lines to buffer for async send. Defaults to 10-->
+            <bufferSize value="20" />
+            <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+            <threads value="2" />
+            <layout type="Gelf4Net.Layout.GelfLayout, Gelf4Net">
+                <param name="AdditionalFields" value="app:AsyncHttpAppender,version:1.0,Environment:Dev,Level:%level" />
+                <param name="Facility" value="RandomPhrases" />
+                <param name="IncludeLocationInformation" value="true" />
+                <param name="SendTimeStampAsString" value="false" />
                 <!--Sets the full_message and short_message to the specified pattern-->
                 <!--<param name="ConversionPattern" value="[%t] %c{1} - %m" />-->
             </layout>
@@ -94,6 +114,10 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
         </appender>
 
         <appender name="AsyncGelfAmqpAppender" type="Gelf4Net.Appender.AsyncGelfAmqpAppender, Gelf4Net">
+            <!-- Number of log lines to buffer for async send. Defaults to 10-->
+            <bufferSize value="20" />
+            <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+            <threads value="2" />
             <remoteAddress value="192.168.44.10" />
             <remotePort value="5672" />
             <username value="guest" />
@@ -116,6 +140,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
             <appender-ref ref="GelfUdpAppenderCC" />
             <appender-ref ref="AsyncGelfUdpAppender" />
             <appender-ref ref="GelfHttpAppender" />
+            <appender-ref ref="AsyncGelfHttpAppender" />
             <appender-ref ref="GelfAmqpAppender" />
             <appender-ref ref="AsyncGelfAmqpAppender" />
         </root>
@@ -148,6 +173,10 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
     </appender>
 
     <appender name="AsyncGelfAmqpAppender" type="Gelf4Net.Appender.AsyncGelfAmqpAppender, Gelf4Net.AmqpAppender">
+        <!-- Number of log lines to buffer for async send. Defaults to 10-->
+        <bufferSize value="20" />
+        <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+        <threads value="2" />
         <remoteAddress value="192.168.44.10" />
         <remotePort value="5672" />
         <username value="guest" />
@@ -194,6 +223,10 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
     </appender>
 
     <appender name="AsyncGelfAmqpAppender" type="Gelf4Net.Appender.AsyncGelfAmqpAppender, Gelf4Net.AmqpAppender">
+        <!-- Number of log lines to buffer for async send. Defaults to 10-->
+        <bufferSize value="20" />
+        <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+        <threads value="2" />
         <remoteAddress value="192.168.44.10" />
         <remotePort value="5672" />
         <username value="guest" />
@@ -235,9 +268,26 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
         </layout>
     </appender>
 
+    <appender name="AsyncGelfHttpAppender" type="Gelf4Net.Appender.AsyncGelfHttpAppender, Gelf4Net.HttpAppender">
+      <!-- Number of log lines to buffer for async send. Defaults to 10-->
+      <bufferSize value="20" />
+      <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+      <threads value="2" />
+      <url value="http://127.0.0.1:12201/gelf" />
+      <layout type="Gelf4net.Layout.GelfLayout, Gelf4Net.HttpAppender">
+        <param name="AdditionalFields" value="app:AsyncGelfHttpAppender,version:1.0,Environment:Dev,Level:%level" />
+        <param name="Facility" value="SimpleConsoleApplicationHttpPackage" />
+        <param name="IncludeLocationInformation" value="true" />
+        <param name="SendTimeStampAsString" value="false" />
+        <!--Sets the full_message and short_message to the specified pattern-->
+        <!--<param name="ConversionPattern" value="[%t] %c{1} - %m" />-->
+      </layout>
+    </appender>
+
     <root>
         <level value="ALL" />
         <appender-ref ref="GelfHttpAppender" />
+        <appender-ref ref="AsyncGelfHttpAppender" />
     </root>
 </log4net>
 ```
@@ -256,6 +306,22 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
         </layout>
     </appender>
 
+    <appender name="AsyncGelfHttpAppender" type="Gelf4Net.Appender.AsyncGelfHttpAppender, Gelf4Net.HttpAppender">
+      <!-- Number of log lines to buffer for async send. Defaults to 10-->
+      <bufferSize value="20" />
+      <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+      <threads value="2" />
+      <url value="http://127.0.0.1:12201/gelf" />
+      <layout type="Gelf4net.Layout.GelfLayout, Gelf4Net.Core">
+        <param name="AdditionalFields" value="app:DotnetcoreAsyncGelfHttpAppender,version:1.0,Environment:Dev,Level:%level" />
+        <param name="Facility" value="SimpleConsoleApplicationHttpPackage" />
+        <param name="IncludeLocationInformation" value="true" />
+        <param name="SendTimeStampAsString" value="false" />
+        <!--Sets the full_message and short_message to the specified pattern-->
+        <!--<param name="ConversionPattern" value="[%t] %c{1} - %m" />-->
+      </layout>
+    </appender>
+
     <root>
         <level value="ALL" />
         <appender-ref ref="GelfHttpAppender" />
@@ -270,6 +336,10 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 ```
 <log4net>
     <appender name="AsyncGelfUdpAppender" type="Gelf4Net.Appender.AsyncGelfUdpAppender, Gelf4Net.UdpAppender">
+        <!-- Number of log lines to buffer for async send. Defaults to 10-->
+        <bufferSize value="20" />
+        <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+        <threads value="2" />
         <remoteAddress value="192.168.44.10" />
         <remotePort value="12201" />
         <maxChunkSize value="3" />
@@ -325,10 +395,26 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
         </layout>
     </appender>
 
+    <appender name="AsyncGelfUdpAppender" type="Gelf4Net.Appender.AsyncGelfUdpAppender, Gelf4Net.UdpAppender">
+        <!-- Number of log lines to buffer for async send. Defaults to 10-->
+        <bufferSize value="20" />
+        <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+        <threads value="2" />
+        <remoteAddress value="127.0.0.1" />
+        <remotePort value="12201" />
+        <maxChunkSize value="3" />
+        <layout type="Gelf4Net.Layout.GelfLayout, Gelf4Net.Core">
+            <param name="AdditionalFields" value="app:DotnetcoreAsyncUdpAppender,version:1.0,Environment:Dev,Level:%level" />
+            <param name="Facility" value="SimpleConsoleApplicationUdpPackage" />
+            <param name="IncludeLocationInformation" value="true" />
+        </layout>
+    </appender>
+
     <root>
         <level value="ALL" />
         <appender-ref ref="GelfUdpAppender" />
         <appender-ref ref="GelfUdpAppenderCC" />
+        <appender-ref ref="AsyncGelfUdpAppender" />
     </root>
 </log4net>
 ```
@@ -510,6 +596,16 @@ var loggingEventData = new LoggingEventData
 };
 var loggingEvent = new LoggingEvent(loggingEventData);
 ```
+
+## AsyncAppender
+
+We have two new parameters in our `AsyncAppenders` thanks to @iwillspeak and a new `AsyncAppender` the `AsyncGelfHttpAppender`
+
+    <!-- Number of log lines to buffer for async send. Defaults to 10-->
+    <bufferSize value="20" />
+    <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
+    <threads value="2" />
+
 
 ## Thanks
 

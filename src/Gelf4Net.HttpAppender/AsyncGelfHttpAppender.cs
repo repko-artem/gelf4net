@@ -6,17 +6,20 @@ namespace Gelf4Net.Appender
 {
     public class AsyncGelfHttpAppender : GelfHttpAppender
     {
-        private readonly BufferedLogSender _sender;
+        private BufferedLogSender _sender;
         public int Threads { get; set; }
         public int BufferSize { get; set; }
 
-        public AsyncGelfHttpAppender()
+        public override void ActivateOptions()
         {
+            base.ActivateOptions();
+
             var options = new BufferedSenderOptions
             {
                 BufferSize = BufferSize,
-                NumTasks = Threads,
+                NumTasks = Threads
             };
+
             _sender = new BufferedLogSender(options, SendMessageAsync);
         }
 
@@ -38,7 +41,7 @@ namespace Gelf4Net.Appender
 
         protected override void OnClose()
         {
-            Debug.WriteLine("Closing Async Appender");
+            Debug.WriteLine("[Gelf4Net] Closing Async Appender");
             _sender.Stop();
             base.OnClose();
         }

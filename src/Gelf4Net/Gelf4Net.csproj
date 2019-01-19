@@ -7,12 +7,12 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>3.0.0.12</Version>
-    <PackageVersion>3.0.0.12</PackageVersion>
+    <Version>3.0.0.13</Version>
+    <PackageVersion>3.0.0.13</PackageVersion>
     <TargetFrameworks>netstandard1.5;net451</TargetFrameworks>
     <Description>GELF log4net UdpAppender, AmqpAppender, HttpAppender - graylog2. Built for log4net</Description>
-    <AssemblyVersion>3.0.0.12</AssemblyVersion>
-    <FileVersion>3.0.0.12</FileVersion>
+    <AssemblyVersion>3.0.0.13</AssemblyVersion>
+    <FileVersion>3.0.0.13</FileVersion>
   </PropertyGroup>
 
 </Project>

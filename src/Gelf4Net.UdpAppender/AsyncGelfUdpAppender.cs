@@ -9,17 +9,20 @@ namespace Gelf4Net.Appender
 {
     public class AsyncGelfUdpAppender : GelfUdpAppender
     {
-        private readonly BufferedLogSender _sender;
+        private BufferedLogSender _sender;
         public int Threads { get; set; }
         public int BufferSize { get; set; }
 
-        public AsyncGelfUdpAppender()
+        public override void ActivateOptions()
         {
+            base.ActivateOptions();
+
             var options = new BufferedSenderOptions
             {
                 BufferSize = BufferSize,
-                NumTasks = Threads,
+                NumTasks = Threads
             };
+
             _sender = new BufferedLogSender(options, SendMessageAsync);
         }
 

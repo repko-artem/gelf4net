@@ -15,6 +15,6 @@
         /// <summary>
         /// Default Number of Items to Buffer for Async Appenders
         /// </summary>
-        internal static int DefaultBufferSize;
+        internal static int DefaultBufferSize = 10;
     }
 }
