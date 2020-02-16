@@ -1,12 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\Gelf4Net.Core\Gelf4Net.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFrameworks>netstandard1.5;net451</TargetFrameworks>
     <Description>GELF log4net UdpAppender - graylog2. Built for log4net</Description>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Gelf4Net.UdpAppender.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.0.18</Version>
+    <PackageLicenseUrl />
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/jjchiw/gelf4net</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

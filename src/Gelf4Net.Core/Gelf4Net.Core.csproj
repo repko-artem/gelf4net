@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.5;net451</TargetFrameworks>
     <Description>GELF log4net core classes.</Description>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Gelf4Net.Core.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.0.18</Version>
+    <PackageLicenseUrl />
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/jjchiw/gelf4net</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +24,17 @@
   <ItemGroup Condition=" '$(TargetFramework)' != 'net451' ">
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

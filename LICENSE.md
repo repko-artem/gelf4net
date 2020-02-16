@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright (c) 2015 Juan J. Chiw and contributors
+Copyright (c) 2015 - 2020 micahlmartin, jjchiw, contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

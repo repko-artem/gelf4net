@@ -36,11 +36,11 @@
     <StartupObject>SimpleConsoleApplication.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gelf4Net.AmqpAppender, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.AmqpAppender.1.0.0.17\lib\net451\Gelf4Net.AmqpAppender.dll</HintPath>
+    <Reference Include="Gelf4Net.AmqpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=e99989f5bfaa0cab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.AmqpAppender.1.0.0.18\lib\net451\Gelf4Net.AmqpAppender.dll</HintPath>
     </Reference>
-    <Reference Include="Gelf4Net.Core, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.Core.1.0.0.17\lib\net451\Gelf4Net.Core.dll</HintPath>
+    <Reference Include="Gelf4Net.Core, Version=1.0.0.18, Culture=neutral, PublicKeyToken=ecd6b73a48e1ad4b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.Core.1.0.0.18\lib\net451\Gelf4Net.Core.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>

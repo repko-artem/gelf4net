@@ -1,10 +1,11 @@
 <Project>
   <PropertyGroup>
-    <Version>1.0.0.17</Version>
-    <PackageVersion>1.0.0.17</PackageVersion>
+    <Version>1.0.0.18</Version>
+    <PackageVersion>1.0.0.18</PackageVersion>
     <Authors>micahlmartin, jjchiw, contributors</Authors>
     <PackageProjectUrl>https://github.com/jjchiw/gelf4net</PackageProjectUrl>
-    <PackageIconUrl>http://nuget.org/Content/Images/packageDefaultIcon.png</PackageIconUrl>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/jjchiw/gelf4net</RepositoryUrl>
   </PropertyGroup>
 </Project>

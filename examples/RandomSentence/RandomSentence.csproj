@@ -37,20 +37,20 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gelf4Net, Version=3.0.0.13, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.3.0.0.13\lib\net451\Gelf4Net.dll</HintPath>
+    <Reference Include="Gelf4Net, Version=3.0.0.14, Culture=neutral, PublicKeyToken=21bcde3c73472639, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.3.0.0.14\lib\net451\Gelf4Net.dll</HintPath>
     </Reference>
-    <Reference Include="Gelf4Net.AmqpAppender, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.AmqpAppender.1.0.0.17\lib\net451\Gelf4Net.AmqpAppender.dll</HintPath>
+    <Reference Include="Gelf4Net.AmqpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=e99989f5bfaa0cab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.AmqpAppender.1.0.0.18\lib\net451\Gelf4Net.AmqpAppender.dll</HintPath>
     </Reference>
-    <Reference Include="Gelf4Net.Core, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.Core.1.0.0.17\lib\net451\Gelf4Net.Core.dll</HintPath>
+    <Reference Include="Gelf4Net.Core, Version=1.0.0.18, Culture=neutral, PublicKeyToken=ecd6b73a48e1ad4b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.Core.1.0.0.18\lib\net451\Gelf4Net.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Gelf4Net.HttpAppender, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.HttpAppender.1.0.0.17\lib\net451\Gelf4Net.HttpAppender.dll</HintPath>
+    <Reference Include="Gelf4Net.HttpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=b04c492d51401e22, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.HttpAppender.1.0.0.18\lib\net451\Gelf4Net.HttpAppender.dll</HintPath>
     </Reference>
-    <Reference Include="Gelf4Net.UdpAppender, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.UdpAppender.1.0.0.17\lib\net451\Gelf4Net.UdpAppender.dll</HintPath>
+    <Reference Include="Gelf4Net.UdpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=d09562935b54ef9a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.UdpAppender.1.0.0.18\lib\net451\Gelf4Net.UdpAppender.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
