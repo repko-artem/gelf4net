@@ -1,4 +1,5 @@
-#addin "Cake.FileHelpers"
+#tool nuget:?package=Cake.Bakery&version=0.5.1
+#addin nuget:?package=Cake.FileHelpers&version=3.3.0
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -73,18 +74,20 @@ Task("PushToNuget")
   .IsDependentOn("BuildPackage")
   .Does(() =>
 {
-    var apiKey = FileReadText(File("./private/nugetapikey.txt"));
-    var settings = new DotNetCoreNuGetPushSettings
+    var apiKey = FileReadLines(File("./private/nugetapikey.txt"))[0];
+
+    var settings = new NuGetPushSettings
     {
         Source = "https://api.nuget.org/v3/index.json",
-        ApiKey = apiKey
+        ApiKey = apiKey,
+        Verbosity = NuGetVerbosity.Detailed,
     };
 
     var files = GetFiles("./artifacts/*.nupkg");
     foreach(var file in files)
     {
         Information("File: {0}", file.FullPath);
-        DotNetCoreNuGetPush(file.FullPath, settings);
+        NuGetPush(file.FullPath, settings);
     }
 });
 
@@ -100,3 +103,4 @@ Task("Default")
 //////////////////////////////////////////////////////////////////////
 
 RunTarget(target);
+
