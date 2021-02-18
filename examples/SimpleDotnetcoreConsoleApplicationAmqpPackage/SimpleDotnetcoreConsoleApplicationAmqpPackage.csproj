@@ -1,19 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>SimpleDotnetcoreConsoleApplicationAmqpPackage</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>SimpleDotnetcoreConsoleApplicationAmqpPackage</PackageId>
-    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Gelf4Net.AmqpAppender" Version="1.0.0.18" />
+    <PackageReference Include="Gelf4Net.AmqpAppender" Version="1.0.0.19" />
   </ItemGroup>
 
   <ItemGroup>

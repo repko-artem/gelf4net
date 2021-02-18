@@ -1,19 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>SimpleDotnetcoreConsoleApplication</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>SimpleDotnetcoreConsoleApplication</PackageId>
-    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Gelf4Net" Version="3.0.0.14" />
+    <PackageReference Include="Gelf4Net" Version="3.0.0.15" />
   </ItemGroup>
 
   <ItemGroup>

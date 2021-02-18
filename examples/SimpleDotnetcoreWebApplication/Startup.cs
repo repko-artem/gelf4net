@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace SimpleDotnetcoreWebApplication
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -26,8 +27,6 @@ namespace SimpleDotnetcoreWebApplication
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
-            env.ConfigureLog4Net();
-
             Configuration = builder.Build();
         }
 
@@ -39,33 +38,37 @@ namespace SimpleDotnetcoreWebApplication
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             //loggerFactory.AddDebug();
-            loggerFactory.AddLog4Net();
-            
+            loggerFactory.AddLog4Net("log4net.config");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
-            
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

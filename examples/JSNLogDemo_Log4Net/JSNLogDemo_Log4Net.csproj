@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JSNLogDemo_Log4Net</RootNamespace>
     <AssemblyName>JSNLogDemo_Log4Net</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -25,6 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,8 +51,8 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Gelf4Net, Version=3.0.0.14, Culture=neutral, PublicKeyToken=21bcde3c73472639, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.3.0.0.14\lib\net451\Gelf4Net.dll</HintPath>
+    <Reference Include="Gelf4Net, Version=3.0.0.15, Culture=neutral, PublicKeyToken=21bcde3c73472639, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gelf4Net.3.0.0.15\lib\net452\Gelf4Net.dll</HintPath>
     </Reference>
     <Reference Include="Gelf4Net.AmqpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=e99989f5bfaa0cab, processorArchitecture=MSIL">
       <HintPath>..\packages\Gelf4Net.AmqpAppender.1.0.0.18\lib\net451\Gelf4Net.AmqpAppender.dll</HintPath>
@@ -68,8 +69,8 @@
     <Reference Include="JSNLog, Version=2.22.1.0, Culture=neutral, PublicKeyToken=742e180f6c5ccd0d, processorArchitecture=MSIL">
       <HintPath>..\packages\JSNLog.2.22.1\lib\net40\JSNLog.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -99,6 +100,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -114,16 +118,17 @@
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\packages\RabbitMQ.Client.4.1.1\lib\net451\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.5.2.0\lib\net451\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -135,8 +140,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -156,13 +159,13 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>

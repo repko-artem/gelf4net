@@ -18,12 +18,12 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>3.0.0.14</Version>
-    <PackageVersion>3.0.0.14</PackageVersion>
-    <TargetFrameworks>netstandard1.5;net451</TargetFrameworks>
+    <Version>3.0.0.15</Version>
+    <PackageVersion>3.0.0.15</PackageVersion>
+    <TargetFrameworks>netstandard1.5;net452;net5.0</TargetFrameworks>
     <Description>GELF log4net UdpAppender, AmqpAppender, HttpAppender - graylog2. Built for log4net</Description>
-    <AssemblyVersion>3.0.0.14</AssemblyVersion>
-    <FileVersion>3.0.0.14</FileVersion>
+    <AssemblyVersion>3.0.0.15</AssemblyVersion>
+    <FileVersion>3.0.0.15</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Gelf4Net.snk</AssemblyOriginatorKeyFile>
     <PackageLicenseUrl />

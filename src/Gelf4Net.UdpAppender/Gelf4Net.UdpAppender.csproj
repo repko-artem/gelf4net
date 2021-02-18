@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.5;net451</TargetFrameworks>
+    <TargetFrameworks>netstandard1.5;net452;net5.0</TargetFrameworks>
     <Description>GELF log4net UdpAppender - graylog2. Built for log4net</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Gelf4Net.UdpAppender.snk</AssemblyOriginatorKeyFile>
