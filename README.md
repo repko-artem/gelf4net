@@ -54,7 +54,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
         <appender name="AsyncGelfUdpAppender" type="Gelf4Net.Appender.AsyncGelfUdpAppender, Gelf4Net">
             <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
             <bufferSize value="2000" />
             <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
             <threads value="2" />
@@ -83,7 +83,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
         <appender name="AsyncGelfHttpAppender" type="Gelf4Net.Appender.AsyncGelfHttpAppender, Gelf4Net">
             <url value="http://127.0.0.1:12201/gelf" />
             <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
             <bufferSize value="2000" />
             <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
             <threads value="2" />
@@ -117,7 +117,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
         <appender name="AsyncGelfAmqpAppender" type="Gelf4Net.Appender.AsyncGelfAmqpAppender, Gelf4Net">
             <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
             <bufferSize value="2000" />
             <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
             <threads value="2" />
@@ -177,7 +177,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
     <appender name="AsyncGelfAmqpAppender" type="Gelf4Net.Appender.AsyncGelfAmqpAppender, Gelf4Net.AmqpAppender">
         <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
         <bufferSize value="2000" />
         <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
         <threads value="2" />
@@ -228,7 +228,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
     <appender name="AsyncGelfAmqpAppender" type="Gelf4Net.Appender.AsyncGelfAmqpAppender, Gelf4Net.AmqpAppender">
         <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
         <bufferSize value="2000" />
         <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
         <threads value="2" />
@@ -275,7 +275,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
     <appender name="AsyncGelfHttpAppender" type="Gelf4Net.Appender.AsyncGelfHttpAppender, Gelf4Net.HttpAppender">
       <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
       <bufferSize value="2000" />
       <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
       <threads value="2" />
@@ -314,7 +314,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
     <appender name="AsyncGelfHttpAppender" type="Gelf4Net.Appender.AsyncGelfHttpAppender, Gelf4Net.HttpAppender">
       <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
       <bufferSize value="2000" />
       <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
       <threads value="2" />
@@ -344,7 +344,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 <log4net>
     <appender name="AsyncGelfUdpAppender" type="Gelf4Net.Appender.AsyncGelfUdpAppender, Gelf4Net.UdpAppender">
         <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
         <bufferSize value="2000" />
         <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
         <threads value="2" />
@@ -405,7 +405,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
     <appender name="AsyncGelfUdpAppender" type="Gelf4Net.Appender.AsyncGelfUdpAppender, Gelf4Net.UdpAppender">
         <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
         <bufferSize value="2000" />
         <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
         <threads value="2" />
@@ -611,7 +611,7 @@ var loggingEvent = new LoggingEvent(loggingEventData);
 We have two new parameters in our `AsyncAppenders` thanks to @iwillspeak and a new `AsyncAppender` the `AsyncGelfHttpAppender`
 
     <!-- Limit of log lines to buffer for async send. Defaults to 1000-->
-<!-- If we cannot connect to graylog it will dequeue messages from the queue-->
+<!-- If we cannot connect to graylog and the queue reaches the buffersize it will dequeue messages from the queue-->
     <bufferSize value="2000" />
     <!-- Number of tasks to use for the async appender. 0 or fewer indicates one task per processor-->
     <threads value="2" />
