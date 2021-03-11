@@ -11,7 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Gelf4Net.AmqpAppender" Version="1.0.0.19" />
+    <ProjectReference Include="..\..\src\Gelf4Net.AmqpAppender\Gelf4Net.AmqpAppender.csproj" />
+    <ProjectReference Include="..\..\src\Gelf4Net\Gelf4Net.csproj" />
   </ItemGroup>
 
   <ItemGroup>

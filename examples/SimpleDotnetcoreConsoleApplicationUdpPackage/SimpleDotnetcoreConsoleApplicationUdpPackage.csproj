@@ -11,7 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Gelf4Net.UdpAppender" Version="1.0.0.19" />
+    <ProjectReference Include="..\..\src\Gelf4Net.UdpAppender\Gelf4Net.UdpAppender.csproj" />
+    <ProjectReference Include="..\..\src\Gelf4Net\Gelf4Net.csproj" />
   </ItemGroup>
 
   <ItemGroup>

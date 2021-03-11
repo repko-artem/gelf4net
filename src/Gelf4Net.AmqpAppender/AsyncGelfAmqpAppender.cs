@@ -23,7 +23,7 @@ namespace Gelf4Net.Appender
                 BufferSize = BufferSize,
                 NumTasks = Threads,
             };
-            _sender = new BufferedLogSender(options, SendMessageAsync);
+            _sender = new BufferedLogSender(options, SendMessageAsync, WaitToSendOnConnectionAsync, IsWaiting);
         }
 
         protected override void Append(LoggingEvent[] loggingEvents)

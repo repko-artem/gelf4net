@@ -8,13 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace SimpleDotnetcoreWebApplication
 {
-     public static class Log4NetAspExtensions
+    public static class Log4NetAspExtensions
     {
-        public static void ConfigureLog4Net(this IHostingEnvironment appEnv)
+        public static void ConfigureLog4Net(this IWebHostEnvironment _)
         {
-            XmlDocument log4netConfig = new XmlDocument();
+            var log4netConfig = new XmlDocument();
 
-            using (StreamReader reader = new StreamReader(new FileStream("log4net.config", FileMode.Open, FileAccess.Read)))
+            using (var reader = new StreamReader(new FileStream("log4net.config", FileMode.Open, FileAccess.Read)))
             {
                 log4netConfig.Load(reader);
             }
@@ -28,5 +28,5 @@ namespace SimpleDotnetcoreWebApplication
         {
             loggerFactory.AddProvider(new Log4NetProvider());
         }
-}
+    }
 }

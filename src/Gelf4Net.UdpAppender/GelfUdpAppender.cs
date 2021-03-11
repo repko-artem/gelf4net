@@ -25,6 +25,10 @@ namespace Gelf4Net.Appender
         /// Gets or sets GrayLogServerHost.
         /// </summary>
         public string RemoteHostName { get; set; }
+        public int RetryAfterMilliseconds { get; set; } = 5000;
+        private TimeSpan _bootTimeoutTimeSpan;
+        private bool _shouldWaitBootTimeout = false;
+        private bool _isWatingBootTimeout = false;
 
         public GelfUdpAppender()
         {
@@ -42,6 +46,8 @@ namespace Gelf4Net.Appender
             }
 
             base.ActivateOptions();
+
+            _bootTimeoutTimeSpan = TimeSpan.FromMilliseconds(RetryAfterMilliseconds);
         }
 
         protected override void InitializeClientConnection()
@@ -72,12 +78,12 @@ namespace Gelf4Net.Appender
             }
         }
 
-        protected Task SendMessageAsync(string logMessage)
+        protected async Task<bool> SendMessageAsync(string logMessage)
         {
-            return SendMessage(logMessage.GzipMessage(Encoding));
+            return await SendMessage(logMessage.GzipMessage(Encoding)).ConfigureAwait(false);
         }
 
-        protected Task SendMessage(byte[] payload)
+        protected Task<bool> SendMessage(byte[] payload)
         {
             return Task.Run(async () =>
             {
@@ -87,8 +93,8 @@ namespace Gelf4Net.Appender
                     {
                         var chunkCount = payload.Length / MaxChunkSize;
                         if (payload.Length % MaxChunkSize != 0)
-                            chunkCount++;                                                   
-                        
+                            chunkCount++;
+
                         var messageId = GenerateMessageId();
                         var state = new UdpState() { SendClient = Client, Bytes = payload, ChunkCount = chunkCount, MessageId = messageId, SendIndex = 0 };
                         var messageChunkFull = GetMessageChunkFull(state.Bytes, state.MessageId, state.SendIndex, state.ChunkCount);
@@ -96,7 +102,7 @@ namespace Gelf4Net.Appender
                         while (state.SendIndex < state.ChunkCount)
                         {
                             messageChunkFull = GetMessageChunkFull(state.Bytes, state.MessageId, state.SendIndex, state.ChunkCount);
-                            await Client.SendAsync(messageChunkFull, messageChunkFull.Length, RemoteEndPoint);
+                            await Client.SendAsync(messageChunkFull, messageChunkFull.Length, RemoteEndPoint).ConfigureAwait(false);
                             state.SendIndex++;
                         }
                     }
@@ -105,10 +111,14 @@ namespace Gelf4Net.Appender
                         var state = new UdpState() { SendClient = Client, Bytes = payload, ChunkCount = 0, MessageId = null, SendIndex = 0 };
                         await Client.SendAsync(payload, payload.Length, RemoteEndPoint);
                     }
+                    _shouldWaitBootTimeout = false;
+                    return true;
                 }
                 catch (Exception ex)
                 {
+                    _shouldWaitBootTimeout = true;
                     this.ErrorHandler.Error("Unable to send logging event to remote host " + this.RemoteAddress + " on port " + this.RemotePort + ".", ex, ErrorCode.WriteFailure);
+                    return false;
                 }
             });
         }
@@ -137,7 +147,7 @@ namespace Gelf4Net.Appender
 
         private async Task<string> GetIpAddressFromHostName()
         {
-            IPAddress[] addresslist = await Dns.GetHostAddressesAsync(RemoteHostName);
+            IPAddress[] addresslist = await Dns.GetHostAddressesAsync(RemoteHostName).ConfigureAwait(false);
             return addresslist[0].ToString();
         }
 
@@ -158,5 +168,17 @@ namespace Gelf4Net.Appender
 
             return result.ToArray<byte>();
         }
+
+        protected async Task WaitToSendOnConnectionAsync()
+        {
+            if (_shouldWaitBootTimeout)
+            {
+                _isWatingBootTimeout = true;
+                await Task.Delay(_bootTimeoutTimeSpan);
+                _shouldWaitBootTimeout = false;
+                _isWatingBootTimeout = false;
+            }
+        }
+        protected bool IsWaiting() => _isWatingBootTimeout;
     }
 }

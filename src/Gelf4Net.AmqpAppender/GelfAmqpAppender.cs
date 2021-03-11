@@ -22,14 +22,21 @@ namespace Gelf4Net.Appender
         public string VirtualHost { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public int RetryAfterMilliseconds { get; set; } = 5000;
         public Encoding Encoding { get; set; }
         protected IConnection Connection { get; set; }
         protected IModel Channel { get; set; }
         private static volatile object _syncLock = new object();
+        private TimeSpan _bootTimeoutTimeSpan;
+        private bool _shouldWaitBootTimeout = false;
+        private bool _isWatingBootTimeout = false;
+
 
         public override void ActivateOptions()
         {
             base.ActivateOptions();
+
+            _bootTimeoutTimeSpan = TimeSpan.FromMilliseconds(RetryAfterMilliseconds);
 
             InitializeConnectionFactory();
         }
@@ -63,10 +70,20 @@ namespace Gelf4Net.Appender
             }
         }
 
-        protected Task SendMessageAsync(string logMessage)
+        protected Task<bool> SendMessageAsync(string logMessage)
         {
-            SendMessage(logMessage.GzipMessage(Encoding));
-            return CompletedTask;
+            try
+            {
+                SendMessage(logMessage.GzipMessage(Encoding));
+                _shouldWaitBootTimeout = false;
+                return Task.FromResult(true);
+            }
+            catch (System.Exception e)
+            {
+                _shouldWaitBootTimeout = true;
+                ErrorHandler.Error("Unable to send logging event", e);
+                return Task.FromResult(false);
+            }
         }
 
         protected void SendMessage(byte[] payload)
@@ -109,6 +126,19 @@ namespace Gelf4Net.Appender
                 Connection.Dispose();
             }
         }
+
+        protected async Task WaitToSendOnConnectionAsync()
+        {
+            if (_shouldWaitBootTimeout)
+            {
+                _isWatingBootTimeout = true;
+                await Task.Delay(_bootTimeoutTimeSpan);
+                _shouldWaitBootTimeout = false;
+                _isWatingBootTimeout = false;
+            }
+        }
+
+        protected bool IsWaiting() => _isWatingBootTimeout;
 
 #if NETSTANDARD1_5
         private static Task CompletedTask = Task.CompletedTask;

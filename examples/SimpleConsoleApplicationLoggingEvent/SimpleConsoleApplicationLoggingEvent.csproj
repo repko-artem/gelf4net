@@ -33,32 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gelf4Net, Version=3.0.0.15, Culture=neutral, PublicKeyToken=21bcde3c73472639, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.3.0.0.15\lib\net452\Gelf4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Gelf4Net.AmqpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=e99989f5bfaa0cab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.AmqpAppender.1.0.0.18\lib\net451\Gelf4Net.AmqpAppender.dll</HintPath>
-    </Reference>
-    <Reference Include="Gelf4Net.Core, Version=1.0.0.18, Culture=neutral, PublicKeyToken=ecd6b73a48e1ad4b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.Core.1.0.0.18\lib\net451\Gelf4Net.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Gelf4Net.HttpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=b04c492d51401e22, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.HttpAppender.1.0.0.18\lib\net451\Gelf4Net.HttpAppender.dll</HintPath>
-    </Reference>
-    <Reference Include="Gelf4Net.UdpAppender, Version=1.0.0.18, Culture=neutral, PublicKeyToken=d09562935b54ef9a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gelf4Net.UdpAppender.1.0.0.18\lib\net451\Gelf4Net.UdpAppender.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\packages\RabbitMQ.Client.5.2.0\lib\net451\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -72,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Gelf4Net.HttpAppender\Gelf4Net.HttpAppender.csproj" />
+    <ProjectReference Include="..\..\src\Gelf4Net.UdpAppender\Gelf4Net.UdpAppender.csproj" />
+    <ProjectReference Include="..\..\src\Gelf4Net.AmqpAppender\Gelf4Net.AmqpAppender.csproj" />
+    <ProjectReference Include="..\..\src\Gelf4Net\Gelf4Net.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,7 +64,7 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
