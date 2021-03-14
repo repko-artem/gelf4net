@@ -11,10 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Gelf4Net.HttpAppender\Gelf4Net.HttpAppender.csproj" />
-    <ProjectReference Include="..\..\src\Gelf4Net.UdpAppender\Gelf4Net.UdpAppender.csproj" />
-    <ProjectReference Include="..\..\src\Gelf4Net.AmqpAppender\Gelf4Net.AmqpAppender.csproj" />
-    <ProjectReference Include="..\..\src\Gelf4Net\Gelf4Net.csproj" />
+    <PackageReference Include="Gelf4Net" Version="3.0.0.16" />
   </ItemGroup>
 
   <ItemGroup>

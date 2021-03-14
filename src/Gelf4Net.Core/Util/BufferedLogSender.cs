@@ -18,6 +18,7 @@ namespace Gelf4Net.Util
         private readonly Func<bool> _funcIsWaiting;
         private readonly Task _sender;
         private readonly int _bufferSize;
+        static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
         public BufferedLogSender(BufferedSenderOptions options, Func<string, Task<bool>> sendFunc) : this(options, sendFunc, null, null)
         {
@@ -61,21 +62,30 @@ namespace Gelf4Net.Util
                     await _funcWaitToRecover().ConfigureAwait(false);
                 }
 
-                if (_pendingTasks.TryPeek(out string payload))
+                await semaphoreSlim.WaitAsync();
+                try
                 {
-                    var shouldDequeue = await _sendFunc(payload).ConfigureAwait(false);
-                    if (shouldDequeue)
+                    if (_pendingTasks.TryPeek(out string payload))
                     {
-                        _pendingTasks.TryDequeue(out _);
-                    }
-                    else
-                    {
-                        if (_pendingTasks.Count > _bufferSize)
+                        var shouldDequeue = await _sendFunc(payload).ConfigureAwait(false);
+                        if (shouldDequeue)
                         {
                             _pendingTasks.TryDequeue(out _);
                         }
+                        else
+                        {
+                            if (_pendingTasks.Count > _bufferSize)
+                            {
+                                _pendingTasks.TryDequeue(out _);
+                            }
+                        }
                     }
                 }
+                finally
+                {
+                    semaphoreSlim.Release();
+                }
+                
             }
             Debug.WriteLine("[Gelf4Net] Stop Buffered Log Sender");
         }

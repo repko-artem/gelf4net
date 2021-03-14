@@ -19,7 +19,7 @@ namespace Gelf4Net.Appender
         public string User { get; set; }
         public string Password { get; set; }
         public int RetryAfterMilliseconds { get; set; } = 5000;
-        public int HttpClientTimeoutMilliseconds { get; set; } = 2000;
+        public int HttpClientTimeoutMilliseconds { get; set; } = 5000;
 
         public GelfHttpAppender()
         {
