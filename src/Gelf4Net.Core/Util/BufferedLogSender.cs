@@ -51,41 +51,48 @@ namespace Gelf4Net.Util
             var token = _cts.Token;
             while (!_cts.IsCancellationRequested)
             {
-                if (_funcIsWaiting != null && _funcIsWaiting())
+                if (_pendingTasks.Count > 0)
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
-                    continue;
-                }
-
-                if (_funcWaitToRecover != null)
-                {
-                    await _funcWaitToRecover().ConfigureAwait(false);
-                }
-
-                await semaphoreSlim.WaitAsync();
-                try
-                {
-                    if (_pendingTasks.TryPeek(out string payload))
+                    if (_funcIsWaiting != null && _funcIsWaiting())
                     {
-                        var shouldDequeue = await _sendFunc(payload).ConfigureAwait(false);
-                        if (shouldDequeue)
+                        await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+                        continue;
+                    }
+
+                    if (_funcWaitToRecover != null)
+                    {
+                        await _funcWaitToRecover().ConfigureAwait(false);
+                    }
+
+                    await semaphoreSlim.WaitAsync();
+                    try
+                    {
+                        if (_pendingTasks.TryPeek(out string payload))
                         {
-                            _pendingTasks.TryDequeue(out _);
-                        }
-                        else
-                        {
-                            if (_pendingTasks.Count > _bufferSize)
+                            Debug.WriteLine("[Gelf4Net] send" + payload);
+                            var shouldDequeue = await _sendFunc(payload).ConfigureAwait(false);
+                            if (shouldDequeue)
                             {
                                 _pendingTasks.TryDequeue(out _);
                             }
+                            else
+                            {
+                                if (_pendingTasks.Count > _bufferSize)
+                                {
+                                    _pendingTasks.TryDequeue(out _);
+                                }
+                            }
                         }
                     }
+                    finally
+                    {
+                        semaphoreSlim.Release();
+                    }
                 }
-                finally
+                else
                 {
-                    semaphoreSlim.Release();
+                    await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
                 }
-                
             }
             Debug.WriteLine("[Gelf4Net] Stop Buffered Log Sender");
         }
