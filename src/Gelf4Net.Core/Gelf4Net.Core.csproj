@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.5;net452;net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462;net6.0</TargetFrameworks>
     <Description>GELF log4net core classes.</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Gelf4Net.Core.snk</AssemblyOriginatorKeyFile>
-    <Version>1.0.0.18</Version>
+    <Version>1.0.0.19</Version>
     <PackageLicenseUrl />
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageIcon>icon.png</PackageIcon>
@@ -17,12 +17,12 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <PackageReference Include="log4net" Version="2.0.12" />
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net452' ">
-    <PackageReference Include="log4net" Version="2.0.12" />
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net462' ">
+    <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
   </ItemGroup>
   

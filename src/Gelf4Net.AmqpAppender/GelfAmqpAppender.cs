@@ -1,6 +1,7 @@
 ﻿using log4net.Appender;
 using RabbitMQ.Client;
 using System;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace Gelf4Net.Appender
                     Enabled = UseTls,
                     ServerName = RemoteAddress,
                     Version = SslProtocols.None
-                };
+                }
             };
             Connection = ConnectionFactory.CreateConnection();
             Channel = Connection.CreateModel();

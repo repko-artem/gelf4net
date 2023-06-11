@@ -5,7 +5,7 @@ gelf4net is a log4net adapter that formats logs to the [GELF][1] specification a
 
 You can install the latest stable release using on of the the nugets package:
 
-All the libraries suppots `net45` and `netstandard1.5`
+All the libraries supports `net46` and `netstandard2.0`
 
 * [`Gelf4Net`](https://www.nuget.org/packages/Gelf4Net/). Contains all the Appenders
 * [`Gelf4Net.UdpAppender`](https://www.nuget.org/packages/Gelf4Net.UdpAppender/). Only UdpAppenders
@@ -18,7 +18,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
 ## Gelf4Net
 
-*net45 & dotnetstandard1.5*
+*net46 & netstandard2.0*
 
 ```
 <?xml version="1.0"?>
@@ -153,7 +153,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
 ## Gelf4Net.AmqpAppender
 
-*net45*
+*net46*
 
 ```
 <log4net>
@@ -206,7 +206,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 </log4net>
 ```
 
-*netstandard1.5*
+*netstandard2.0*
 
 ```
 <log4net>
@@ -257,7 +257,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
 ## Gelf4Net.HttpAppender
 
-*net45*
+*net46*
 
 ```
 <log4net>
@@ -298,7 +298,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 </log4net>
 ```
 
-*dotnetstandard1.5*
+*netstandard2.0*
 
 ```
 <log4net>
@@ -338,7 +338,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 
 ## Gelf4Net.UdpAppender
 
-*net45*
+*net46*
 
 ```
 <log4net>
@@ -377,7 +377,7 @@ Gelf4Net gives you the ability to log messages either through Udp, Amqp or Http.
 </log4net>
 ```
 
-*dotnetstandard1.5*
+*dotnetstandard2.0*
 
 ```
 <log4net>
