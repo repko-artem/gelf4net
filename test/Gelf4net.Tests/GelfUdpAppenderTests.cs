@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using NUnit.Framework.Legacy;
 
 namespace Gelf4Net.Tests.Appender
 {
@@ -17,7 +18,7 @@ namespace Gelf4Net.Tests.Appender
         {
             const int expectedLength = 8;
             var actual = GelfUdpAppender.GenerateMessageId();
-            Assert.AreEqual(actual.Length, expectedLength);
+            ClassicAssert.AreEqual(actual.Length, expectedLength);
         }
 
         [Test]
@@ -35,7 +36,7 @@ namespace Gelf4Net.Tests.Appender
             }
 
             // Assert
-            Assert.That(generatedIds.Count, Is.EqualTo(maxIterations));
+            ClassicAssert.That(generatedIds.Count, Is.EqualTo(maxIterations));
         }
 
         [Test]
@@ -50,8 +51,8 @@ namespace Gelf4Net.Tests.Appender
             byte[] result = GelfUdpAppender.CreateChunkedMessagePart(messageId, index, chunkCount);
 
             // Assert
-            Assert.That(result[0], Is.EqualTo(30));
-            Assert.That(result[1], Is.EqualTo(15));
+            ClassicAssert.That(result[0], Is.EqualTo(30));
+            ClassicAssert.That(result[1], Is.EqualTo(15));
         }
 
         [Test]
@@ -66,14 +67,14 @@ namespace Gelf4Net.Tests.Appender
             byte[] result = GelfUdpAppender.CreateChunkedMessagePart(messageId, index, chunkCount);
 
             // Assert
-            Assert.That(result[2], Is.EqualTo((int)'A'));
-            Assert.That(result[3], Is.EqualTo((int)'1'));
-            Assert.That(result[4], Is.EqualTo((int)'B'));
-            Assert.That(result[5], Is.EqualTo((int)'2'));
-            Assert.That(result[6], Is.EqualTo((int)'C'));
-            Assert.That(result[7], Is.EqualTo((int)'3'));
-            Assert.That(result[8], Is.EqualTo((int)'D'));
-            Assert.That(result[9], Is.EqualTo((int)'4'));
+            ClassicAssert.That(result[2], Is.EqualTo((int)'A'));
+            ClassicAssert.That(result[3], Is.EqualTo((int)'1'));
+            ClassicAssert.That(result[4], Is.EqualTo((int)'B'));
+            ClassicAssert.That(result[5], Is.EqualTo((int)'2'));
+            ClassicAssert.That(result[6], Is.EqualTo((int)'C'));
+            ClassicAssert.That(result[7], Is.EqualTo((int)'3'));
+            ClassicAssert.That(result[8], Is.EqualTo((int)'D'));
+            ClassicAssert.That(result[9], Is.EqualTo((int)'4'));
         }
 
         [Test]
@@ -88,8 +89,8 @@ namespace Gelf4Net.Tests.Appender
             byte[] result = GelfUdpAppender.CreateChunkedMessagePart(messageId, index, chunkCount);
 
             // Assert
-            Assert.That(result[10], Is.EqualTo(index));
-            Assert.That(result[11], Is.EqualTo(chunkCount));
+            ClassicAssert.That(result[10], Is.EqualTo(index));
+            ClassicAssert.That(result[11], Is.EqualTo(chunkCount));
         }
     }
 }

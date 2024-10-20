@@ -40,3 +40,4 @@ examples/JSNLogDemo_Log4Net/Logs/
 
 artifacts/
 examples/.vs/
+.idea

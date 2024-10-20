@@ -45,7 +45,7 @@ namespace Gelf4Net.Appender
 
         protected virtual void InitializeConnectionFactory()
         {
-            ConnectionFactory = new ConnectionFactory()
+            var connectionFactory = new ConnectionFactory()
             {
                 HostName = RemoteAddress,
                 Port = RemotePort,
@@ -53,13 +53,19 @@ namespace Gelf4Net.Appender
                 UserName = Username,
                 Password = Password,
                 AutomaticRecoveryEnabled = true,
-                Ssl = new SslOption
+            };
+
+            if (UseTls)
+            {
+                connectionFactory.Ssl = new SslOption
                 {
                     Enabled = UseTls,
                     ServerName = RemoteAddress,
                     Version = SslProtocols.None
-                }
-            };
+                };
+            }
+
+            ConnectionFactory = connectionFactory;
             Connection = ConnectionFactory.CreateConnection();
             Channel = Connection.CreateModel();
         }

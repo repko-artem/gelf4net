@@ -5,13 +5,11 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net462;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
     <Description>GELF log4net AmqpAppender - graylog2. Built for log4net</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Gelf4Net.AmqpAppender.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.0.19</AssemblyVersion>
-    <FileVersion>1.0.0.19</FileVersion>
-    <Version>1.0.0.19</Version>
+    <Version>1.0.1.0</Version>
     <PackageLicenseUrl />
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageIcon>icon.png</PackageIcon>
@@ -20,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using NUnit.Framework.Legacy;
 
 namespace Gelf4Net.Tests.Layout
 {
@@ -28,8 +29,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message.ToString(), result.FullMessage);
-            Assert.AreEqual(message.ToString(), result.ShortMessage);
+            ClassicAssert.AreEqual(message.ToString(), result.FullMessage);
+            ClassicAssert.AreEqual(message.ToString(), result.ShortMessage);
         }
 
         [Test]
@@ -42,8 +43,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message, result.FullMessage);
-            Assert.AreEqual(message, result.ShortMessage);
+            ClassicAssert.AreEqual(message, result.FullMessage);
+            ClassicAssert.AreEqual(message, result.ShortMessage);
         }
 
         [Test]
@@ -56,8 +57,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Test"], message.Test);
-            Assert.AreEqual(result["_Test2"], message.Test2);
+            ClassicAssert.AreEqual(result["_Test"], message.Test);
+            ClassicAssert.AreEqual(result["_Test2"], message.Test2);
         }
 
         [Test]
@@ -73,8 +74,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message);
-            Assert.AreEqual(result["_TraceID"], 1);
+            ClassicAssert.AreEqual(result.FullMessage, message);
+            ClassicAssert.AreEqual(result["_TraceID"], 1);
         }
 
         [Test]
@@ -91,7 +92,7 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_obj"], someObject.ToString());
+            ClassicAssert.AreEqual(result["_obj"], someObject.ToString());
         }
 
         [Test]
@@ -116,16 +117,16 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_decimal"], 1);
-            Assert.AreEqual(result["_double"], 1);
-            Assert.AreEqual(result["_float"], 1);
-            Assert.AreEqual(result["_int"], 1);
-            Assert.AreEqual(result["_uint"], 1);
-            Assert.AreEqual(result["_long"], 1);
-            Assert.AreEqual(result["_ulong"], 1);
-            Assert.AreEqual(result["_short"], 1);
-            Assert.AreEqual(result["_ushort"], 1);
-            Assert.AreEqual(result["_nullable"], 1);
+            ClassicAssert.AreEqual(result["_decimal"], 1);
+            ClassicAssert.AreEqual(result["_double"], 1);
+            ClassicAssert.AreEqual(result["_float"], 1);
+            ClassicAssert.AreEqual(result["_int"], 1);
+            ClassicAssert.AreEqual(result["_uint"], 1);
+            ClassicAssert.AreEqual(result["_long"], 1);
+            ClassicAssert.AreEqual(result["_ulong"], 1);
+            ClassicAssert.AreEqual(result["_short"], 1);
+            ClassicAssert.AreEqual(result["_ushort"], 1);
+            ClassicAssert.AreEqual(result["_nullable"], 1);
         }
 
         [Test]
@@ -137,12 +138,12 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message);
-            Assert.AreEqual(result.Facility, "Gelf");
-            Assert.AreEqual(result.Host, Environment.MachineName);
-            Assert.AreEqual(result.Level, (int)LocalSyslogAppender.SyslogSeverity.Debug);
-            Assert.IsTrue(result.TimeStamp >= DateTime.Now.AddMinutes(-1));
-            Assert.AreEqual(result.Version, "1.0");
+            ClassicAssert.AreEqual(result.FullMessage, message);
+            ClassicAssert.AreEqual(result.Facility, "Gelf");
+            ClassicAssert.AreEqual(result.Host, Environment.MachineName);
+            ClassicAssert.AreEqual(result.Level, (int)LocalSyslogAppender.SyslogSeverity.Debug);
+            ClassicAssert.IsTrue(result.TimeStamp >= DateTime.Now.AddMinutes(-1));
+            ClassicAssert.AreEqual(result.Version, "1.0");
         }
 
         [Test]
@@ -158,8 +159,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message);
-            Assert.AreEqual(result["_TraceID"], 1);
+            ClassicAssert.AreEqual(result.FullMessage, message);
+            ClassicAssert.AreEqual(result["_TraceID"], 1);
         }
 
         [Test]
@@ -171,29 +172,29 @@ namespace Gelf4Net.Tests.Layout
             var loggingEvent = GetLogginEvent(message);
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message.Message);
-            Assert.AreEqual(result["_Test"], message.Test);
+            ClassicAssert.AreEqual(result.FullMessage, message.Message);
+            ClassicAssert.AreEqual(result["_Test"], message.Test);
 
             var message2 = new { FullMessage = "Success", Test = 1 };
             loggingEvent = GetLogginEvent(message2);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message2.FullMessage);
-            Assert.AreEqual(result["_Test"], message2.Test);
+            ClassicAssert.AreEqual(result.FullMessage, message2.FullMessage);
+            ClassicAssert.AreEqual(result["_Test"], message2.Test);
 
             var message3 = new { message = "Success", Test = 1 };
             loggingEvent = GetLogginEvent(message3);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message3.message);
-            Assert.AreEqual(result["_Test"], message3.Test);
+            ClassicAssert.AreEqual(result.FullMessage, message3.message);
+            ClassicAssert.AreEqual(result["_Test"], message3.Test);
 
             var message4 = new { full_Message = "Success", Test = 1 };
             loggingEvent = GetLogginEvent(message4);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message4.full_Message);
-            Assert.AreEqual(result["_Test"], message4.Test);
+            ClassicAssert.AreEqual(result.FullMessage, message4.full_Message);
+            ClassicAssert.AreEqual(result["_Test"], message4.Test);
         }
 
         [Test]
@@ -205,31 +206,31 @@ namespace Gelf4Net.Tests.Layout
             var loggingEvent = GetLogginEvent(message);
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.ShortMessage, message.ShortMessage);
-            Assert.AreEqual(result["_Test"], message.Test);
+            ClassicAssert.AreEqual(result.ShortMessage, message.ShortMessage);
+            ClassicAssert.AreEqual(result["_Test"], message.Test);
 
             var message2 = new { short_message = "Success", Test = 1 };
             loggingEvent = GetLogginEvent(message2);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.ShortMessage, message2.short_message);
-            Assert.AreEqual(result["_Test"], message2.Test);
+            ClassicAssert.AreEqual(result.ShortMessage, message2.short_message);
+            ClassicAssert.AreEqual(result["_Test"], message2.Test);
 
             var message3 = new { message = "Success", Test = 1 };
             loggingEvent = GetLogginEvent(message3);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message3.message);
-            Assert.AreEqual(result.ShortMessage, message3.message);
-            Assert.AreEqual(result["_Test"], message3.Test);
+            ClassicAssert.AreEqual(result.FullMessage, message3.message);
+            ClassicAssert.AreEqual(result.ShortMessage, message3.message);
+            ClassicAssert.AreEqual(result["_Test"], message3.Test);
 
             var message4 = new { message = "Success", short_message = "test", Test = 1 };
             loggingEvent = GetLogginEvent(message4);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message4.message);
-            Assert.AreEqual(result.ShortMessage, message4.short_message);
-            Assert.AreEqual(result["_Test"], message4.Test);
+            ClassicAssert.AreEqual(result.FullMessage, message4.message);
+            ClassicAssert.AreEqual(result.ShortMessage, message4.short_message);
+            ClassicAssert.AreEqual(result["_Test"], message4.Test);
         }
 
         [Test]
@@ -242,8 +243,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Test"], message["Test"]);
-            Assert.AreEqual(result["_Test2"], message["_Test2"]);
+            ClassicAssert.AreEqual(result["_Test"], message["Test"]);
+            ClassicAssert.AreEqual(result["_Test2"], message["_Test2"]);
         }
 
         [Test]
@@ -257,10 +258,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -276,10 +277,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -294,10 +295,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -312,10 +313,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -329,8 +330,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual("[DEBUG] - [Class]", result["full_message"]);
-            Assert.AreEqual("[DEBUG] - [Class]", result["short_message"]);
+            ClassicAssert.AreEqual("[DEBUG] - [Class]", result["full_message"]);
+            ClassicAssert.AreEqual("[DEBUG] - [Class]", result["short_message"]);
         }
 
         [Test]
@@ -344,10 +345,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Test"], message.Test);
-            Assert.AreEqual(result["_Test2"], message.Test2);
-            Assert.AreEqual(result.FullMessage, message.ToString());
-            Assert.AreEqual(result.ShortMessage, message.ToString().TruncateMessage(250));
+            ClassicAssert.AreEqual(result["_Test"], message.Test);
+            ClassicAssert.AreEqual(result["_Test2"], message.Test2);
+            ClassicAssert.AreEqual(result.FullMessage, message.ToString());
+            ClassicAssert.AreEqual(result.ShortMessage, message.ToString().TruncateMessage(250));
         }
 
         [Test]
@@ -361,10 +362,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message, result.FullMessage);
-            Assert.AreEqual(message, result.ShortMessage);
-            Assert.IsEmpty(result.Line);
-            Assert.IsEmpty(result.File);
+            ClassicAssert.AreEqual(message, result.FullMessage);
+            ClassicAssert.AreEqual(message, result.ShortMessage);
+            ClassicAssert.IsEmpty(result.Line);
+            ClassicAssert.IsEmpty(result.File);
         }
 
         [Test]
@@ -377,15 +378,22 @@ namespace Gelf4Net.Tests.Layout
             var loggingEvent = GetLogginEvent(message);
             loggingEvent.Properties["nullProperty"] = null;
 
-            Assert.DoesNotThrow(() => GetMessage(layout, loggingEvent));
+            ClassicAssert.DoesNotThrow(() => GetMessage(layout, loggingEvent));
         }
 
-        private GelfMessage GetMessage(GelfLayout layout, LoggingEvent message)
+        private GelfMessage GetMessage(GelfLayout layout, LoggingEvent message, bool sendTimeStampAsString = true)
         {
             var sb = new StringBuilder();
             using (var sw = new StringWriter(sb))
                 layout.Format(sw, message);
 
+            if (sendTimeStampAsString)
+            {
+                var gelfMessage = new GelfMessage(true);
+                JsonConvert.PopulateObject(sb.ToString(), gelfMessage);
+                return gelfMessage;
+            }
+            
             return JsonConvert.DeserializeObject<GelfMessage>(sb.ToString());
         }
 
@@ -399,8 +407,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message.ToString(), result.FullMessage);
-            Assert.AreEqual(message.ToString(), result.ShortMessage);
+            ClassicAssert.AreEqual(message.ToString(), result.FullMessage);
+            ClassicAssert.AreEqual(message.ToString(), result.ShortMessage);
         }
 
         [Test]
@@ -413,8 +421,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message, result.FullMessage);
-            Assert.AreEqual(message, result.ShortMessage);
+            ClassicAssert.AreEqual(message, result.FullMessage);
+            ClassicAssert.AreEqual(message, result.ShortMessage);
         }
 
         [Test]
@@ -428,8 +436,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Test"], message.Test.ToString());
-            Assert.AreEqual(result["_Test2"], message.Test2.ToString());
+            ClassicAssert.AreEqual(result["_Test"], message.Test.ToString());
+            ClassicAssert.AreEqual(result["_Test2"], message.Test2.ToString());
         }
 
         [Test]
@@ -445,8 +453,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message);
-            Assert.AreEqual(result["_TraceID"], 1);
+            ClassicAssert.AreEqual(result.FullMessage, message);
+            ClassicAssert.AreEqual(result["_TraceID"], 1);
         }
 
         [Test]
@@ -463,7 +471,7 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_obj"], someObject.ToString());
+            ClassicAssert.AreEqual(result["_obj"], someObject.ToString());
         }
 
         [Test]
@@ -488,16 +496,16 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_decimal"], 1);
-            Assert.AreEqual(result["_double"], 1);
-            Assert.AreEqual(result["_float"], 1);
-            Assert.AreEqual(result["_int"], 1);
-            Assert.AreEqual(result["_uint"], 1);
-            Assert.AreEqual(result["_long"], 1);
-            Assert.AreEqual(result["_ulong"], 1);
-            Assert.AreEqual(result["_short"], 1);
-            Assert.AreEqual(result["_ushort"], 1);
-            Assert.AreEqual(result["_nullable"], 1);
+            ClassicAssert.AreEqual(result["_decimal"], 1);
+            ClassicAssert.AreEqual(result["_double"], 1);
+            ClassicAssert.AreEqual(result["_float"], 1);
+            ClassicAssert.AreEqual(result["_int"], 1);
+            ClassicAssert.AreEqual(result["_uint"], 1);
+            ClassicAssert.AreEqual(result["_long"], 1);
+            ClassicAssert.AreEqual(result["_ulong"], 1);
+            ClassicAssert.AreEqual(result["_short"], 1);
+            ClassicAssert.AreEqual(result["_ushort"], 1);
+            ClassicAssert.AreEqual(result["_nullable"], 1);
         }
 
         [Test]
@@ -509,12 +517,12 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message);
-            Assert.AreEqual(result.Facility, "Gelf");
-            Assert.AreEqual(result.Host, Environment.MachineName);
-            Assert.AreEqual(result.Level, (int)LocalSyslogAppender.SyslogSeverity.Debug);
-            Assert.IsTrue(result.TimeStamp >= DateTime.Now.AddMinutes(-1));
-            Assert.AreEqual(result.Version, "1.0");
+            ClassicAssert.AreEqual(result.FullMessage, message);
+            ClassicAssert.AreEqual(result.Facility, "Gelf");
+            ClassicAssert.AreEqual(result.Host, Environment.MachineName);
+            ClassicAssert.AreEqual(result.Level, (int)LocalSyslogAppender.SyslogSeverity.Debug);
+            ClassicAssert.IsTrue(result.TimeStamp >= DateTime.Now.AddMinutes(-1));
+            ClassicAssert.AreEqual(result.Version, "1.0");
         }
 
         [Test]
@@ -530,8 +538,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message);
-            Assert.AreEqual(result["_TraceID"], 1);
+            ClassicAssert.AreEqual(result.FullMessage, message);
+            ClassicAssert.AreEqual(result["_TraceID"], 1);
         }
 
         [Test]
@@ -544,32 +552,32 @@ namespace Gelf4Net.Tests.Layout
             var loggingEvent = GetLogginEventRenderedMessage(messageJson);
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message.Message);
-            Assert.AreEqual(result["_Test"], message.Test.ToString());
+            ClassicAssert.AreEqual(result.FullMessage, message.Message);
+            ClassicAssert.AreEqual(result["_Test"], message.Test.ToString());
 
             var message2 = new { FullMessage = "Success", Test = 1 };
             var message2Json = JsonConvert.SerializeObject(message2);
             loggingEvent = GetLogginEventRenderedMessage(message2Json);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message2.FullMessage);
-            Assert.AreEqual(result["_Test"], message2.Test.ToString());
+            ClassicAssert.AreEqual(result.FullMessage, message2.FullMessage);
+            ClassicAssert.AreEqual(result["_Test"], message2.Test.ToString());
 
             var message3 = new { message = "Success", Test = 1 };
             var message3Json = JsonConvert.SerializeObject(message3);
             loggingEvent = GetLogginEventRenderedMessage(message3Json);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message3.message);
-            Assert.AreEqual(result["_Test"], message3.Test.ToString());
+            ClassicAssert.AreEqual(result.FullMessage, message3.message);
+            ClassicAssert.AreEqual(result["_Test"], message3.Test.ToString());
 
             var message4 = new { full_Message = "Success", Test = 1 };
             var message4Json = JsonConvert.SerializeObject(message4);
             loggingEvent = GetLogginEventRenderedMessage(message4Json);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message4.full_Message);
-            Assert.AreEqual(result["_Test"], message4.Test.ToString());
+            ClassicAssert.AreEqual(result.FullMessage, message4.full_Message);
+            ClassicAssert.AreEqual(result["_Test"], message4.Test.ToString());
         }
 
         [Test]
@@ -582,34 +590,34 @@ namespace Gelf4Net.Tests.Layout
             var loggingEvent = GetLogginEventRenderedMessage(messageJson);
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.ShortMessage, message.ShortMessage);
-            Assert.AreEqual(result["_Test"], message.Test.ToString());
+            ClassicAssert.AreEqual(result.ShortMessage, message.ShortMessage);
+            ClassicAssert.AreEqual(result["_Test"], message.Test.ToString());
 
             var message2 = new { short_message = "Success", Test = 1 };
             var message2Json = JsonConvert.SerializeObject(message2);
             loggingEvent = GetLogginEventRenderedMessage(message2Json);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.ShortMessage, message2.short_message);
-            Assert.AreEqual(result["_Test"], message2.Test.ToString());
+            ClassicAssert.AreEqual(result.ShortMessage, message2.short_message);
+            ClassicAssert.AreEqual(result["_Test"], message2.Test.ToString());
 
             var message3 = new { message = "Success", Test = 1 };
             var message3Json = JsonConvert.SerializeObject(message3);
             loggingEvent = GetLogginEventRenderedMessage(message3Json);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message3.message);
-            Assert.AreEqual(result.ShortMessage, message3.message);
-            Assert.AreEqual(result["_Test"], message3.Test.ToString());
+            ClassicAssert.AreEqual(result.FullMessage, message3.message);
+            ClassicAssert.AreEqual(result.ShortMessage, message3.message);
+            ClassicAssert.AreEqual(result["_Test"], message3.Test.ToString());
 
             var message4 = new { message = "Success", short_message = "test", Test = 1 };
             var message4Json = JsonConvert.SerializeObject(message4);
             loggingEvent = GetLogginEventRenderedMessage(message4Json);
             result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result.FullMessage, message4.message);
-            Assert.AreEqual(result.ShortMessage, message4.short_message);
-            Assert.AreEqual(result["_Test"], message4.Test.ToString());
+            ClassicAssert.AreEqual(result.FullMessage, message4.message);
+            ClassicAssert.AreEqual(result.ShortMessage, message4.short_message);
+            ClassicAssert.AreEqual(result["_Test"], message4.Test.ToString());
         }
 
         [Test]
@@ -623,10 +631,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -642,10 +650,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -660,10 +668,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -678,10 +686,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Level"], "DEBUG");
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
-            Assert.AreEqual("Class", result["_LoggerName"]);
+            ClassicAssert.AreEqual(result["_Level"], "DEBUG");
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_AppDomain"].ToString()));
+            ClassicAssert.IsTrue(!string.IsNullOrWhiteSpace(result["_ThreadName"].ToString()));
+            ClassicAssert.AreEqual("Class", result["_LoggerName"]);
         }
 
         [Test]
@@ -695,8 +703,8 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual("[DEBUG] - [Class]", result["full_message"]);
-            Assert.AreEqual("[DEBUG] - [Class]", result["short_message"]);
+            ClassicAssert.AreEqual("[DEBUG] - [Class]", result["full_message"]);
+            ClassicAssert.AreEqual("[DEBUG] - [Class]", result["short_message"]);
         }
 
         [Test]
@@ -711,10 +719,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(result["_Test"], message.Test.ToString());
-            Assert.AreEqual(result["_Test2"], message.Test2.ToString());
-            Assert.AreEqual(result.FullMessage, messageJson);
-            Assert.AreEqual(result.ShortMessage, messageJson.TruncateMessage(250));
+            ClassicAssert.AreEqual(result["_Test"], message.Test.ToString());
+            ClassicAssert.AreEqual(result["_Test2"], message.Test2.ToString());
+            ClassicAssert.AreEqual(result.FullMessage, messageJson);
+            ClassicAssert.AreEqual(result.ShortMessage, messageJson.TruncateMessage(250));
         }
 
         [Test]
@@ -728,10 +736,10 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message, result.FullMessage);
-            Assert.AreEqual(message, result.ShortMessage);
-            Assert.That(result.Line, Is.Not.Null.And.Not.Empty);
-            Assert.That(result.File, Is.Not.Null.And.Not.Empty);
+            ClassicAssert.AreEqual(message, result.FullMessage);
+            ClassicAssert.AreEqual(message, result.ShortMessage);
+            ClassicAssert.That(result.Line, Is.Not.Null.And.Not.Empty);
+            ClassicAssert.That(result.File, Is.Not.Null.And.Not.Empty);
         }
 
         [Test]
@@ -744,7 +752,7 @@ namespace Gelf4Net.Tests.Layout
             var loggingEvent = GetLogginEventRenderedMessage(message);
             loggingEvent.Properties["nullProperty"] = null;
 
-            Assert.DoesNotThrow(() => GetMessage(layout, loggingEvent));
+            ClassicAssert.DoesNotThrow(() => GetMessage(layout, loggingEvent));
         }
 
         private static LoggingEvent GetLogginEvent(object message)
@@ -758,17 +766,18 @@ namespace Gelf4Net.Tests.Layout
         {
             var layout = new GelfLayout();
             layout.IncludeLocationInformation = true;
+            layout.SendTimeStampAsString = true;
 
             var message = "test";
             var loggingEvent = GetLogginEventRenderedMessage(message);
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message, result.FullMessage);
-            Assert.AreEqual(message, result.ShortMessage);
-            Assert.AreEqual(typeof(string), result["timestamp"].GetType());
-            Assert.That(result.Line, Is.Not.Null.And.Not.Empty);
-            Assert.That(result.File, Is.Not.Null.And.Not.Empty);
+            ClassicAssert.AreEqual(message, result.FullMessage);
+            ClassicAssert.AreEqual(message, result.ShortMessage);
+            ClassicAssert.AreEqual(typeof(string), result["timestamp"].GetType());
+            ClassicAssert.That(result.Line, Is.Not.Null.And.Not.Empty);
+            ClassicAssert.That(result.File, Is.Not.Null.And.Not.Empty);
         }
 
         [Test]
@@ -783,11 +792,11 @@ namespace Gelf4Net.Tests.Layout
 
             var result = GetMessage(layout, loggingEvent);
 
-            Assert.AreEqual(message, result.FullMessage);
-            Assert.AreEqual(message, result.ShortMessage);
-            Assert.AreEqual(typeof(double), result["timestamp"].GetType());
-            Assert.That(result.Line, Is.Not.Null.And.Not.Empty);
-            Assert.That(result.File, Is.Not.Null.And.Not.Empty);
+            ClassicAssert.AreEqual(message, result.FullMessage);
+            ClassicAssert.AreEqual(message, result.ShortMessage);
+            ClassicAssert.AreEqual(typeof(double), result["timestamp"].GetType());
+            ClassicAssert.That(result.Line, Is.Not.Null.And.Not.Empty);
+            ClassicAssert.That(result.File, Is.Not.Null.And.Not.Empty);
         }
 
         private static LoggingEvent GetLogginEventRenderedMessage(string message)
@@ -797,7 +806,7 @@ namespace Gelf4Net.Tests.Layout
                 Message = message,
                 LoggerName = "Test.Logger.Class",
                 Level = Level.Debug,
-                TimeStamp = DateTime.UtcNow,
+                TimeStampUtc = DateTime.UtcNow,
                 LocationInfo = new LocationInfo("Test.Logger.Class", "Method", "Hola.cs", "8")
             };
             return new LoggingEvent(loggingEventData);
