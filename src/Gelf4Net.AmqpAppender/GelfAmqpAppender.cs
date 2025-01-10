@@ -27,7 +27,7 @@ namespace Gelf4Net.Appender
         public bool UseTls { get; set; } = true;
         public Encoding Encoding { get; set; }
         protected IConnection Connection { get; set; }
-        protected IModel Channel { get; set; }
+        protected IChannel Channel { get; set; }
         private static volatile object _syncLock = new object();
         private TimeSpan _bootTimeoutTimeSpan;
         private bool _shouldWaitBootTimeout = false;
@@ -66,8 +66,8 @@ namespace Gelf4Net.Appender
             }
 
             ConnectionFactory = connectionFactory;
-            Connection = ConnectionFactory.CreateConnection();
-            Channel = Connection.CreateModel();
+            Connection = ConnectionFactory.CreateConnectionAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            Channel = Connection.CreateChannelAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         protected override void Append(log4net.Core.LoggingEvent loggingEvent)
@@ -105,7 +105,8 @@ namespace Gelf4Net.Appender
             if (WaitForConnectionToConnectOrReconnect(new TimeSpan(0, 0, 0, 0, 500)))
             {
                 lock (_syncLock)
-                    Channel.BasicPublish(Exchange, Key, null, payload);
+                    Channel.BasicPublishAsync<BasicProperties>(Exchange, Key, true, null, payload, 
+                        CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
         }
 
@@ -131,12 +132,12 @@ namespace Gelf4Net.Appender
         {
             if (Channel != null)
             {
-                Channel.Close();
+                Channel.CloseAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                 Channel.Dispose();
             }
             if (Connection != null)
             {
-                Connection.Close();
+                Connection.CloseAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                 Connection.Dispose();
             }
         }
