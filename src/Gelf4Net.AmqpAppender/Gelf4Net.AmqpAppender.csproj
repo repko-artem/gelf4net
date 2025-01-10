@@ -6,15 +6,16 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
-    <Description>GELF log4net AmqpAppender - graylog2. Built for log4net</Description>
+    <Description>Creatio fork for GELF log4net AmqpAppender - graylog2. Built for log4net. For support RabbitMQ.Client >=7.0</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Gelf4Net.AmqpAppender.snk</AssemblyOriginatorKeyFile>
-    <Version>1.0.1.0</Version>
+    <Version>1.0.3.2</Version>
     <PackageLicenseUrl />
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <RepositoryUrl>https://github.com/jjchiw/gelf4net</RepositoryUrl>
+    <RepositoryUrl>https://github.com/repko-artem/gelf4net/settings</RepositoryUrl>
+    <PackageVersion>1.0.3.2</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
