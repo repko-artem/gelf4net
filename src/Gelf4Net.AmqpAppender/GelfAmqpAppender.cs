@@ -105,7 +105,7 @@ namespace Gelf4Net.Appender
             if (WaitForConnectionToConnectOrReconnect(new TimeSpan(0, 0, 0, 0, 500)))
             {
                 lock (_syncLock)
-                    Channel.BasicPublishAsync<BasicProperties>(Exchange, Key, true, null, payload, 
+                    Channel.BasicPublishAsync<BasicProperties>(Exchange, Key, true, new BasicProperties(), payload, 
                         CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
         }
